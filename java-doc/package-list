@@ -1,0 +1,6 @@
+com.deliveroo.assignment
+com.deliveroo.assignment.exception
+com.deliveroo.assignment.handlers
+com.deliveroo.assignment.parser
+com.deliveroo.assignment.utils
+com.deliveroo.assignment.validator
