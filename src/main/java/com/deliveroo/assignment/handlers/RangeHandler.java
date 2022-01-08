@@ -2,10 +2,11 @@ package com.deliveroo.assignment.handlers;
 
 import com.deliveroo.assignment.exception.WrongOrderParsingException;
 
+import java.util.List;
+
 import static com.deliveroo.assignment.utils.Constants.HIPHEN;
 import static com.deliveroo.assignment.utils.Constants.ORDER_NOT_CORRECT_WITH_HIPHEN;
-import static com.deliveroo.assignment.utils.CronUtilities.findIndexOfValueInArray;
-import static com.deliveroo.assignment.utils.CronUtilities.stringifySubsetInArray;
+import static com.deliveroo.assignment.utils.CronUtilities.*;
 
 /**
  * Handles the fields for all possible values as per the range provided. Range is provide with the help of '-'
@@ -18,17 +19,19 @@ public class RangeHandler extends Handler {
     }
 
     @Override
-    public String handle(String fieldValue, String[] array) {
+    public String handle(String fieldValue, List<String[]> listOfDataSet) {
         if (fieldValue.contains(HIPHEN)) {
             String[] splittedArr = fieldValue.split(HIPHEN);
-            if (findIndexOfValueInArray(splittedArr[1], array) < findIndexOfValueInArray(splittedArr[0], array)) {
+            String[] dataSet = findApplicableDataSet(splittedArr[0], listOfDataSet);
+            if (findIndexOfValueInArray(splittedArr[1], dataSet) < findIndexOfValueInArray(splittedArr[0], dataSet)) {
                 throw new WrongOrderParsingException(String.format("%s=>%s", ORDER_NOT_CORRECT_WITH_HIPHEN, fieldValue));
             }
-            return toString(fieldValue, array);
+            return toString(fieldValue, dataSet);
         }
-
-        return handleNext(fieldValue, array);
+        return handleNext(fieldValue, listOfDataSet);
     }
+
+
 
     private String toString(String fieldValue, String[] arr) {
         String[] values = fieldValue.split(HIPHEN);
@@ -39,6 +42,5 @@ public class RangeHandler extends Handler {
         int endIndex = findIndexOfValueInArray(end, arr);
 
         return stringifySubsetInArray(arr, startIndex, endIndex, 1);
-
     }
 }

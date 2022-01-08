@@ -2,15 +2,13 @@ package com.deliveroo.assignment.test.parser;
 
 import com.deliveroo.assignment.handlers.*;
 import com.deliveroo.assignment.parser.GenericParser;
+import com.deliveroo.assignment.utils.CronUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.deliveroo.assignment.utils.Constants.*;
 
 public class GenericParserTest {
     private static GenericParser genericParser;
@@ -24,14 +22,7 @@ public class GenericParserTest {
         ArbitValueHandler arbitValueHandler = new ArbitValueHandler(multipleValuesHandler);
         AnyValueHandler anyValueHandler = new AnyValueHandler(arbitValueHandler);
 
-        Map<Integer, String[]> valuesMap = new HashMap<>();
-        valuesMap.put(MINUTES_IDX, MINUTES);
-        valuesMap.put(HOURS_IDX, HOURS);
-        valuesMap.put(DAY_OF_MONTH_IDX, DAY_OF_MONTH);
-        valuesMap.put(MONTH_IDX, MONTH);
-        valuesMap.put(DAY_OF_WEEK_IDX, DAY_OF_WEEK);
-
-        genericParser = new GenericParser(anyValueHandler, valuesMap);
+        genericParser = new GenericParser(anyValueHandler, CronUtilities.populateMasterData());
     }
 
     @Test

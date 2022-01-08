@@ -20,13 +20,13 @@ public class ArbitValueHandlerTest {
 
     @Test
     public void testHappyCase() {
-        String result = handler.handle(cronField, TestConstants.MASTER_DATA);
+        String result = handler.handle(cronField, TestConstants.getListOfDataSet());
         Assertions.assertEquals("", result);
     }
 
     @Test
     public void testNegative() {
-        String result = handler.handle("1/2/3", TestConstants.MASTER_DATA);
+        String result = handler.handle("1/2/3", TestConstants.getListOfDataSet());
         Assertions.assertEquals(TestConstants.PARSING_ABILITY_NOT_EXISTS, result);
     }
 }

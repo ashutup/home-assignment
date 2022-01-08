@@ -2,6 +2,8 @@ package com.deliveroo.assignment.handlers;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 import static com.deliveroo.assignment.utils.Constants.COMMA;
 
 /**
@@ -14,14 +16,14 @@ public class MultipleValuesHandler extends Handler {
     }
 
     @Override
-    public String handle(String fieldValue, String[] array) {
+    public String handle(String fieldValue, List<String[]> listOfDataSet) {
         if (fieldValue.contains(COMMA)) {
-            return toString(fieldValue, array);
+            return toString(fieldValue);
         }
-        return handleNext(fieldValue, array);
+        return handleNext(fieldValue, listOfDataSet);
     }
 
-    private String toString(String fieldValue, String[] arr) {
+    private String toString(String fieldValue) {
         String[] values = fieldValue.split(COMMA);
 
         StringBuilder buffer = new StringBuilder();
@@ -29,6 +31,5 @@ public class MultipleValuesHandler extends Handler {
             buffer.append(val).append(StringUtils.SPACE);
         }
         return buffer.toString().trim();
-
     }
 }

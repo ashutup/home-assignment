@@ -14,9 +14,9 @@ import static com.deliveroo.assignment.utils.Constants.cronFieldPositions;
 public class GenericParser {
 
     private Handler genericHandlerChain;
-    private Map<Integer, String[]> masterData;
+    private Map<Integer, List<String[]>> masterData;
 
-    public GenericParser(Handler genericHandlerChain, Map<Integer, String[]> masterData) {
+    public GenericParser(Handler genericHandlerChain, Map<Integer, List<String[]>> masterData) {
         this.genericHandlerChain = genericHandlerChain;
         this.masterData = masterData;
     }

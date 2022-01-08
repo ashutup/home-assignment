@@ -1,5 +1,6 @@
 package com.deliveroo.assignment;
 
+import com.deliveroo.assignment.exception.WrongOrderParsingException;
 import com.deliveroo.assignment.handlers.*;
 import com.deliveroo.assignment.parser.GenericParser;
 import org.apache.commons.lang3.ArrayUtils;
@@ -47,7 +48,7 @@ public class CronExpressionParser {
             ArbitValueHandler arbitValueHandler = new ArbitValueHandler(multipleValuesHandler);
             AnyValueHandler anyValueHandler = new AnyValueHandler(arbitValueHandler);
 
-            Map<Integer, String[]> valuesMap = populateMasterData();
+            Map<Integer, List<String[]>> valuesMap = populateMasterData();
 
             GenericParser genericParser = new GenericParser(anyValueHandler, valuesMap);
             List<String> results = genericParser.parseCronExpression(splittedValues);
@@ -59,6 +60,9 @@ public class CronExpressionParser {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        catch(WrongOrderParsingException wpe){
+            System.out.println(wpe.getMessage());
         }
 
     }

@@ -3,6 +3,8 @@ package com.deliveroo.assignment.handlers;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 import static com.deliveroo.assignment.utils.Constants.QUESTION_MARK;
 
 /**
@@ -16,10 +18,10 @@ public class ArbitValueHandler extends Handler {
     }
 
     @Override
-    public String handle(String fieldValue, String[] array) {
+    public String handle(String fieldValue, List<String[]> listOfDataSet){
         if (fieldValue.equalsIgnoreCase(QUESTION_MARK)) {
             return StringUtils.EMPTY;
         }
-        return handleNext(fieldValue, array);
+        return handleNext(fieldValue, listOfDataSet);
     }
 }

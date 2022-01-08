@@ -1,7 +1,8 @@
 package com.deliveroo.assignment.handlers;
 
-import static com.deliveroo.assignment.utils.Constants.ASTERISK;
-import static com.deliveroo.assignment.utils.Constants.FORWARD_SLASH;
+import java.util.List;
+
+import static com.deliveroo.assignment.utils.Constants.*;
 import static com.deliveroo.assignment.utils.CronUtilities.findIndexOfValueInArray;
 import static com.deliveroo.assignment.utils.CronUtilities.stringifySubsetInArray;
 
@@ -17,12 +18,11 @@ public class StepHandler extends Handler {
     }
 
     @Override
-    public String handle(String fieldValue, String[] arr) {
+    public String handle(String fieldValue, List<String[]> listOfDataSet) {
         if (fieldValue.contains(FORWARD_SLASH)) {
-            return toString(fieldValue, arr);
+            return toString(fieldValue, listOfDataSet.get(POSITION_OF_DEFAULT_DATASET));
         }
-
-        return handleNext(fieldValue, arr);
+        return handleNext(fieldValue, listOfDataSet);
     }
 
     private String toString(String fieldValue, String[] arr) {
@@ -39,6 +39,5 @@ public class StepHandler extends Handler {
         }
 
         return stringifySubsetInArray(arr, startIndex, endIndex, step);
-
     }
 }

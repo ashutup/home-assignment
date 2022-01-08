@@ -1,5 +1,7 @@
 package com.deliveroo.assignment.handlers;
 
+import java.util.List;
+
 import static com.deliveroo.assignment.utils.Constants.PARSING_ABILITY_NOT_EXISTS;
 
 /**
@@ -15,9 +17,9 @@ public abstract class Handler {
     /**
      * Delegates to the next handler
      */
-    public String handleNext(String fieldValue, String[] array) {
+    public String handleNext(String fieldValue, List<String[]> listOfDataSet) {
         if (nextHandler != null)
-            return nextHandler.handle(fieldValue, array);
+            return nextHandler.handle(fieldValue, listOfDataSet);
         else
             return PARSING_ABILITY_NOT_EXISTS;
     }
@@ -25,5 +27,5 @@ public abstract class Handler {
     /**
      * Handles one field of cron expression and returns the elaborated string version for the same
      */
-    public abstract String handle(String fieldValue, String[] array);
+    public abstract String handle(String fieldValue, List<String[]> listOfDataSet);
 }

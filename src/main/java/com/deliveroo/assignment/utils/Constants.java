@@ -37,6 +37,9 @@ public class Constants {
     public static final int[] cronFieldPositions = {0, 1, 2, 3, 4};
     public static final String[] HEADERS = {"minute", "hour", "day of month", "month", "day of week", "command"};
 
+    //index of data set in case of * when there are multiple data sets available for a field
+    public static final int POSITION_OF_DEFAULT_DATASET = 0;
+
     //String constants
     public static final String PARSING_ABILITY_NOT_EXISTS = "PARSING_ABILITY_NOT_EXISTS";
     public static final int HEADERS_PADDING_SIZE = 14;

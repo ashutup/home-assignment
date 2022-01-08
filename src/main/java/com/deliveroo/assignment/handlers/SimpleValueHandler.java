@@ -1,5 +1,7 @@
 package com.deliveroo.assignment.handlers;
 
+import java.util.List;
+
 import static com.deliveroo.assignment.utils.Constants.*;
 
 /**
@@ -12,7 +14,7 @@ public class SimpleValueHandler extends Handler {
     }
 
     @Override
-    public String handle(String fieldValue, String[] array) {
+    public String handle(String fieldValue, List<String[]> listOfDataSet) {
         if (!fieldValue.contains(ASTERISK)
                 && !fieldValue.contains(HIPHEN)
                 && !fieldValue.contains(COMMA)
@@ -20,6 +22,6 @@ public class SimpleValueHandler extends Handler {
                 && !fieldValue.contains(FORWARD_SLASH))
             return fieldValue;
 
-        return handleNext(fieldValue, array);
+        return handleNext(fieldValue, listOfDataSet);
     }
 }

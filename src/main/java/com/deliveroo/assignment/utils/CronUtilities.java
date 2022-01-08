@@ -4,9 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,9 +70,6 @@ public class CronUtilities {
     /**
      * Returns string representation of array starting from startIndex, taking step at a time till endIndex.
      *
-     * @param arr
-     * @param startIndex
-     * @param endIndex
      * @param step       if step is 1 then all value from startIndex to endIndex. If step is 2 then start from startIndex and add 2 at a time till endIndex
      * @return
      */
@@ -96,16 +91,44 @@ public class CronUtilities {
      *
      * @return Map containing master data of all fields
      */
-    public static Map<Integer, String[]> populateMasterData() {
+    public static Map<Integer, List<String[]>> populateMasterData() {
 
-        Map<Integer, String[]> valuesMap = new HashMap<>();
-        valuesMap.put(MINUTES_IDX, MINUTES);
-        valuesMap.put(HOURS_IDX, HOURS);
-        valuesMap.put(DAY_OF_MONTH_IDX, DAY_OF_MONTH);
-        valuesMap.put(MONTH_IDX, MONTH);
-        valuesMap.put(DAY_OF_WEEK_IDX, DAY_OF_WEEK);
+        Map<Integer, List<String[]>> valuesMap = new HashMap<>();
+        List<String[]> dataSetList = new ArrayList<>();
+
+        dataSetList.add(MINUTES);
+        valuesMap.put(MINUTES_IDX, dataSetList);
+
+        dataSetList = new ArrayList<>();
+        dataSetList.add(HOURS);
+        valuesMap.put(HOURS_IDX, dataSetList);
+
+        dataSetList = new ArrayList<>();
+        dataSetList.add(DAY_OF_MONTH);
+        valuesMap.put(DAY_OF_MONTH_IDX, dataSetList);
+
+        dataSetList = new ArrayList<>();
+        dataSetList.add(MONTH);
+        valuesMap.put(MONTH_IDX, dataSetList);
+
+        dataSetList = new ArrayList<>();
+        dataSetList.add(DAY_OF_WEEK);
+        valuesMap.put(DAY_OF_WEEK_IDX, dataSetList);
 
         return valuesMap;
+    }
+
+    public static String[] findApplicableDataSet(String value, List<String[]> list){
+        if(list.size() == 1){
+            return list.get(0);
+        }
+        for (String[] arr : list){
+            for (String str : arr) {
+                if(value.equalsIgnoreCase(str))
+                    return arr;
+            }
+        }
+        return new String[]{};
     }
 
 }

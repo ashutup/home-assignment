@@ -22,13 +22,13 @@ public class RangeHandlerTest {
 
     @Test
     public void testHappyCase() {
-        String result = handler.handle(cronField, TestConstants.MASTER_DATA);
+        String result = handler.handle(cronField, TestConstants.getListOfDataSet());
         Assertions.assertEquals("1 2 3 4 5 6 7 8 9 10", result);
     }
 
     @Test
     public void testNegative() {
-        String result = handler.handle("1/2/3", TestConstants.MASTER_DATA);
+        String result = handler.handle("1/2/3", TestConstants.getListOfDataSet());
         Assertions.assertEquals(TestConstants.PARSING_ABILITY_NOT_EXISTS, result);
     }
 
@@ -37,7 +37,7 @@ public class RangeHandlerTest {
         Assertions.assertThrows(WrongOrderParsingException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                handler.handle("3-1", TestConstants.MASTER_DATA);
+                handler.handle("3-1", TestConstants.getListOfDataSet());
             }
         });
     }
