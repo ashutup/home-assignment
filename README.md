@@ -64,7 +64,7 @@ To generate the executable JAR file, **run 'gradle fatJar'**
 
 To run the cron parser run the following command
 
-**java -jar cron-parser-all-1.0-SNAPSHOT.jar "20" "13" "2-8" "1/3" "2,3" "doSomething"**
+**java -jar cron-parser-all-1.0-SNAPSHOT.jar "20 13 2-8 1/3 2,3 doSomething"**
 
 You will be seeing thee following output.<br/>
 minute        20<br/>
